@@ -1,0 +1,149 @@
+/* Top menu CSS */
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  padding-left:10%;
+  /*overflow: hidden;*/
+  background-color: #333;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+li {
+  float: left;
+}
+
+li img {
+  padding-top: 5px;
+  padding-right: 10px;
+  padding-left: 10px;
+  margin: auto;
+  height:40px;
+  width:40px;
+}
+
+li:last-child {
+  padding-right:20%;
+  float: right;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 20;
+  float: left;
+}
+
+li .about:hover:not(.active) {
+  background-color: #111;
+}
+
+/* Top menu > Form CSS */
+
+li div {
+  float: left;
+}
+
+li div form {
+  float: left;
+  margin-top: 10;
+}
+
+li fieldset {
+  border: none;
+  -ms-transform: translateY(-10%);
+  transform: translateY(-10%);
+}
+
+
+
+/* Table menu CSS */
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+.column1 {
+ width: 15%;
+}
+
+.column2 {
+ width: 20%;
+}
+
+.column3 {
+ width: 60%;
+}
+
+.column4 {
+ width: 5%;
+}
+
+
+/* Page CSS */
+
+.topmenu {
+  height:50px;
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.mainpage {
+  margin-top:60px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+}
+
+/*.topmenu {
+}*/
+
+.topmenu .tooltiptext {
+  visibility: hidden;
+  width: 100%;
+  background-color: #258959;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 7px 15px;
+  position: absolute;
+  z-index: 1;
+  top: 120%;
+  left: 35%;
+  margin-left: -60px;
+
+  transition: opacity 1s;
+  opacity: 0;
+}
+
+.topmenu .tooltiptext::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 40%;
+  margin-left: -10px;
+  border-width: 10px;
+  border-style: solid;
+  border-color: transparent transparent #258959 transparent;
+}
+
+.topmenu:hover .tooltiptext {
+  visibility: visible;
+  transition: opacity 1s;
+  opacity: 1;
+}

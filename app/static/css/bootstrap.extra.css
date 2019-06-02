@@ -1,0 +1,26 @@
+.column-text-left {
+	text-align: left;
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.container {
+	margin-top: 7px;
+}
+
+form {
+	width: 100%;
+}
+
+.col {
+  margin-top: 7px;
+}
+
+#form_text_input {
+	float: left;
+}
+
+#form_button {
+	float: left;
+}
