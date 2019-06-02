@@ -1,0 +1,57 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hazliconnect
+  labels:
+    app: hazliconnect
+    sla: low
+    maintainer: "xtorrent"
+    team: SRE
+spec:
+  selector:
+    matchLabels:
+      app: hazliconnect
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: hazliconnect
+    spec:
+      containers:
+      - name: hazliconnect
+        image: sendotux/hazliconnect:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5000
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: hazliconnect
+  name: hazliconnect
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 5000
+  selector:
+    app: hazliconnect
+
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: hazliconnect
+spec:
+  rules:
+  - host: hazliconnect-test.home.sendotux.net
+    http:
+      paths:
+      - backend:
+          serviceName: hazliconnect
+          servicePort: 80
+        path: /
