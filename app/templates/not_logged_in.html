@@ -17,6 +17,19 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.extra.css') }}">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+  <style>
+  .catimgcontainer {
+    margin-top: 1em;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .lessmargin {
+    padding-right: 5px;
+    padding-left: 5px;
+  }
+  </style>
 </head>
 
 <body>
@@ -39,14 +52,26 @@
     </div>
   </nav>
 
-    <div class="container d-none">
-      <iframe src="https://gitlab.home.sendotux.net/users/sign_out"></iframe>
-      <p>!!!</p>
+  <!-- Page Content -->
+  <div class="container">
+    <div class="row row-eq-height">
+      <div class="col-6 text-center">
+        <div class=catimgcontainer>
+          <div class=catimgcontainerinner>
+            <img src="{{url_for('static', filename='images/home_hazel_scaled.jpg')}}" class="rounded-circle mx-auto d-block img-thumbnail catpic" alt="">
+          </div>
+        </div>
+      </div>
+      <div class="col-6 text-center align-middle d-flex align-items-center">
+        <div>
+          <h1>Hazliconnect</h1>
+          <h3>Test application to test login with oauth and Gitlab as auth server.</h3>
+          <p class="small">This application requires authentication.</p>
+          <a class="btn btn-primary" href="/login" role="button">Login with Gitlab</a>
+        </div>
+      </div>
     </div>
-
-    <div class="container">
-      <p>You should be logged off :|</p>
-    </div>
+  </div>
 
 
   <!-- Bootstrap core JavaScript -->

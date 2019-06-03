@@ -7,7 +7,7 @@ app.debug = True
 app.secret_key = 'development'
 oauth = OAuth(app)
 
-VERSION = "0.0.2"
+VERSION = "0.1.0"
 
 gitlab = oauth.remote_app('gitlab',
     base_url='https://gitlab.home.sendotux.net/api/v3/',
@@ -25,7 +25,8 @@ def index():
         me = gitlab.get('user')
         return render_template('index.html', data=me.data, version=VERSION)
         #return jsonify(me.data)
-    return redirect(url_for('login'))
+    return render_template('not_logged_in.html', version=VERSION)
+    #return redirect(url_for('login'))
 
 
 @app.route('/login')
@@ -35,10 +36,7 @@ def login():
 
 @app.route('/logout')
 def logout():
-    #response = urllib.request.urlopen('https://gitlab.home.sendotux.net/users/sign_out')
     session.pop('gitlab_token', None)
-    #return redirect('https://gitlab.home.sendotux.net/users/sign_out', code=302)
-
     return render_template('logout.html', version=VERSION)
 
 
