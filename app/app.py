@@ -2,12 +2,16 @@ from flask import Flask, render_template, redirect, url_for, session, request, j
 from flask_oauthlib.client import OAuth
 import urllib.request
 
+import datetime
+
 app = Flask(__name__)
 app.debug = True
 app.secret_key = 'development'
 oauth = OAuth(app)
 
-VERSION = "0.1.0"
+VERSION = "0.1.1"
+ENVIRONMENT = "test"
+RELEASE_TIME = datetime.datetime.now()
 
 gitlab = oauth.remote_app('gitlab',
     base_url='https://gitlab.home.sendotux.net/api/v3/',
@@ -23,7 +27,7 @@ gitlab = oauth.remote_app('gitlab',
 def index():
     if 'gitlab_token' in session:
         me = gitlab.get('user')
-        return render_template('index.html', data=me.data, version=VERSION)
+        return render_template('index.html', data=me.data, release_time=RELEASE_TIME, environment=ENVIRONMENT, version=VERSION)
         #return jsonify(me.data)
     return render_template('not_logged_in.html', version=VERSION)
     #return redirect(url_for('login'))
