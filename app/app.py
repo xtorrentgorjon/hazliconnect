@@ -9,7 +9,7 @@ app.debug = True
 app.secret_key = 'development'
 oauth = OAuth(app)
 
-VERSION = "0.2.1"
+VERSION = "0.2.2"
 ENVIRONMENT = "test"
 RELEASE_TIME = datetime.datetime.now()
 
@@ -29,8 +29,10 @@ gitlab = oauth.remote_app('gitlab',
 def index():
     if 'gitlab_token' in session:
         me = gitlab.get('user')
+        PAGE_INFO["rightside_link"] = "logout"
         return render_template('index.html', data=me.data, page_info=PAGE_INFO)
         #return jsonify(me.data)
+    PAGE_INFO["rightside_link"] = "index"
     return render_template('not_logged_in.html', page_info=PAGE_INFO)
     #return redirect(url_for('login'))
 
@@ -43,6 +45,7 @@ def login():
 @app.route('/logout')
 def logout():
     session.pop('gitlab_token', None)
+    PAGE_INFO["rightside_link"] = "index"
     return render_template('logout.html', page_info=PAGE_INFO)
 
 

@@ -22,7 +22,11 @@
   <div>
     <ul class="navbar-nav">
     <li class="nav-item">
-      <a class="nav-link" href="logout">Logout</a>
+      {% if page_info.rightside_link == "index" %}
+        <a class="nav-link" href="/"></a>
+      {% else %}
+        <a class="nav-link" href="logout">Logout</a>
+      {% endif %}
     </li>
     </ul>
   </div>
