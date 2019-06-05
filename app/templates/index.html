@@ -2,53 +2,42 @@
 <html lang="en">
 
 <head>
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="Xavier Torrent">
-
-  <title>Hazliconnect - {{version}}</title>
-  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon_cat.ico') }}">
-
-
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
+{% include 'template_head.html' %}
 </head>
 
 <body>
-  <!-- Navigation -->
-  {% with environment=environment, release_time=release_time, version=version %}
-  {% include 'top_navbar.html' %}
-  {% endwith %}
 
+<div class="container">
+  <div class="row row-eq-height">
+    <div class="col-12 text-center">
 
-    <div class="container">
-      <div class="card bg-light mb-3">
-        <h1 class="card-header">{{data['name']}} ({{data['username']}})</h1>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-lg-4 text-center">
-              <img src="{{data['avatar_url']}}" width="200" height="200" class="rounded mx-auto d-block" alt="">
-            </div>
-            <div class="col-lg-8 text-center my-auto">
-              <h3>User email: {{data['public_email']}}</h3>
-              <h3>Last sign in: {{data['last_sign_in_at']}}</h3>
-              <h3>Selected theme: {{data['theme_id']}}</h3>
+      <!-- Navigation -->
+      {% with page_info=page_info %}
+      {% include 'template_top_navbar.html' %}
+      {% endwith %}
+
+      <!-- Content -->
+      <div class="container" style="margin-top: 7px;">
+        <div class="card bg-light mb-3">
+          <h1 class="card-header">{{data['name']}} ({{data['username']}})</h1>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-4 text-center">
+                <img src="{{data['avatar_url']}}" width="200" height="200" class="rounded mx-auto d-block" alt="">
+              </div>
+              <div class="col-lg-8 text-center my-auto">
+                <h3>User email: {{data['public_email']}}</h3>
+                <h3>Last sign in: {{data['last_sign_in_at']}}</h3>
+                <h3>Selected theme: {{data['theme_id']}}</h3>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <span class="badge badge-pill badge-primary">Primary</span>
+    </div>
+  </div>
+</div>
 
 </body>
 

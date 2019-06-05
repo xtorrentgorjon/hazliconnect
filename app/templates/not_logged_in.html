@@ -2,21 +2,7 @@
 <html lang="en">
 
 <head>
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="Xavier Torrent">
-
-  <title>Hazliconnect - {{version}}</title>
-  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon_cat.ico') }}">
-
-  <!-- Bootstrap core CSS -->
-  <!--<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">-->
-  <link rel="stylesheet" href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.extra.css') }}">
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+{% include 'template_head.html' %}
 
   <style>
   .catimgcontainer {
@@ -34,50 +20,40 @@
 
 <body>
 
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
-    <div class="container">
-      <img src="{{url_for('static', filename='images/cat-icon.png')}}" width="30" height="30" class="d-inline-block align-top" alt="">
-      <a class="navbar-brand" href="/">Hazliconnect {{version}}</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="/">Back</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
 
-  <!-- Page Content -->
   <div class="container">
     <div class="row row-eq-height">
-      <div class="col-6 text-center">
-        <div class=catimgcontainer>
-          <div class=catimgcontainerinner>
-            <img src="{{url_for('static', filename='images/home_hazel_scaled.jpg')}}" class="rounded-circle mx-auto d-block img-thumbnail catpic" alt="">
+      <div class="col-12 text-center">
+
+      <!-- Navigation -->
+      {% with page_info=page_info %}
+      {% include 'template_top_navbar.html' %}
+      {% endwith %}
+
+      <!-- Page Content -->
+      <div class="container" style="margin-top: 7px;">
+        <div class="row row-eq-height">
+          <div class="col-6 text-center">
+            <div class=catimgcontainer>
+              <div class=catimgcontainerinner>
+                <img src="{{url_for('static', filename='images/home_hazel_scaled.jpg')}}" class="rounded-circle mx-auto d-block img-thumbnail catpic" alt="">
+              </div>
+            </div>
+          </div>
+          <div class="col-6 text-center align-middle d-flex align-items-center">
+            <div>
+              <h1>Hazliconnect</h1>
+              <h3>Test application to test login with oauth and Gitlab as auth server.</h3>
+              <p class="small">This application requires authentication.</p>
+              <a class="btn btn-primary" href="/login" role="button">Login with Gitlab</a>
+            </div>
           </div>
         </div>
       </div>
-      <div class="col-6 text-center align-middle d-flex align-items-center">
-        <div>
-          <h1>Hazliconnect</h1>
-          <h3>Test application to test login with oauth and Gitlab as auth server.</h3>
-          <p class="small">This application requires authentication.</p>
-          <a class="btn btn-primary" href="/login" role="button">Login with Gitlab</a>
-        </div>
-      </div>
+
     </div>
   </div>
-
-
-  <!-- Bootstrap core JavaScript -->
-  <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
-  <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-
+</div>
 
 </body>
 
