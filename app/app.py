@@ -9,7 +9,7 @@ app.debug = True
 app.secret_key = 'development'
 oauth = OAuth(app)
 
-VERSION = "0.2.3"
+VERSION = "0.2.4"
 ENVIRONMENT = "test"
 RELEASE_TIME = datetime.datetime.now()
 
