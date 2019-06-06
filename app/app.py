@@ -12,13 +12,17 @@ app.debug = True
 app.secret_key = 'development'
 oauth = OAuth(app)
 
-VERSION = "0.2.4"
-ENVIRONMENT = "test"
+VERSION = "0.2.6"
+ENVIRONMENT = "undefined"
+ENVIRONMENT = os.environ["KUBERNETES_NAMESPACE"]
+PARENT_HOST = "undefined"
+PARENT_HOST = os.environ["KUBERNETES_NODE"]
 RELEASE_TIME = datetime.datetime.now()
 
 PAGE_INFO = {"version":VERSION,
             "environment":ENVIRONMENT,
-            "release_time":str(RELEASE_TIME)}
+            "release_time":str(RELEASE_TIME),
+            "parent_host":PARENT_HOST}
 
 LOG_PARAM = {"ip":os.environ["LOG_ENDPOINT_IP"],
             "port":int(os.environ["LOG_ENDPOINT_PORT"])}
