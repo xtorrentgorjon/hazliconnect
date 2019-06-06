@@ -3,6 +3,7 @@ RUN pip3 install Flask
 RUN pip3 install kubernetes
 RUN pip3 install flask_wtf
 RUN pip3 install flask_oauthlib
+RUN pip3 install pygelf
 WORKDIR /usr/src/app
 
 COPY ./ ./
