@@ -12,9 +12,11 @@ app.debug = True
 app.secret_key = 'development'
 oauth = OAuth(app)
 
+APP_NAME = "undefined"
+APP_NAME = os.environ["KUBERNETES_APPNAME"]
 POD_NAME = "undefined"
 POD_NAME = os.environ["KUBERNETES_PODNAME"]
-VERSION = "0.2.8"
+VERSION = "0.2.10"
 ENVIRONMENT = "undefined"
 ENVIRONMENT = os.environ["KUBERNETES_NAMESPACE"]
 PARENT_HOST = "undefined"
@@ -41,7 +43,7 @@ gelflogger = logging.getLogger()
 class ContextFilter(logging.Filter):
     def filter(self, record):
         record.version = VERSION
-        record.k8s_app = POD_NAME
+        record.k8s_app = APP_NAME
         record.k8s_namespace = ENVIRONMENT
         record.k8s_node = PARENT_HOST
         record.k8s_pod_name = POD_NAME
