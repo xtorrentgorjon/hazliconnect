@@ -27,6 +27,16 @@ spec:
     spec:
       containers:
       - env:
+        - name: KUBERNETES_APPNAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.labels['app']
+        - name: KUBERNETES_PODNAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
         - name: KUBERNETES_NAMESPACE
           valueFrom:
             fieldRef:

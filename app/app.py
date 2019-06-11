@@ -70,6 +70,7 @@ gitlab = oauth.remote_app('gitlab',
 @app.route('/')
 def index():
     if 'gitlab_token' in session:
+        gelflogger.info('User <{}> visiting main page action.'.format(str(gitlab.get('user').data['public_email'])))
         me = gitlab.get('user')
         PAGE_INFO["rightside_link"] = "logout"
         gelflogger.info('New client reaching the index page!')
@@ -87,6 +88,7 @@ def login():
 
 @app.route('/logout')
 def logout():
+    gelflogger.info('User <{}> logout action.'.format(str(gitlab.get('user').data['public_email'])))
     session.pop('gitlab_token', None)
     PAGE_INFO["rightside_link"] = "index"
     return render_template('logout.html', page_info=PAGE_INFO)
@@ -101,6 +103,7 @@ def authorized():
             request.args['error_description']
         )
     session['gitlab_token'] = (resp['access_token'], '')
+    gelflogger.info('User <{}> login action.'.format(str(gitlab.get('user').data['public_email'])))
     return redirect(url_for('index'))
 
 @gitlab.tokengetter
