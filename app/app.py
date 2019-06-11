@@ -12,7 +12,7 @@ app.debug = True
 app.secret_key = 'development'
 oauth = OAuth(app)
 
-VERSION = "0.2.6"
+VERSION = "0.2.7"
 ENVIRONMENT = "undefined"
 ENVIRONMENT = os.environ["KUBERNETES_NAMESPACE"]
 PARENT_HOST = "undefined"
