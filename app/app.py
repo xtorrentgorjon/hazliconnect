@@ -9,14 +9,16 @@ import os
 
 app = Flask(__name__)
 app.debug = True
-app.secret_key = 'development'
+#app.secret_key = 'development'
 oauth = OAuth(app)
+
+## Start Set Up Kubernetes Variables ##
 
 APP_NAME = "undefined"
 APP_NAME = os.environ["KUBERNETES_APPNAME"]
 POD_NAME = "undefined"
 POD_NAME = os.environ["KUBERNETES_PODNAME"]
-VERSION = "0.2.11"
+VERSION = "0.2.12"
 ENVIRONMENT = "undefined"
 ENVIRONMENT = os.environ["KUBERNETES_NAMESPACE"]
 PARENT_HOST = "undefined"
@@ -34,6 +36,8 @@ LOG_PARAM = {"ip":os.environ["LOG_ENDPOINT_IP"],
 OAUTH_PARAM = {"url":os.environ["OAUTH_GITLAB_URL"],
                 "key":os.environ["OAUTH_GITLAB_KEY"],
                 "secret":os.environ["OAUTH_GITLAB_SECRET"]}
+
+## Stop Set Up Kubernetes Variables ##
 
 ## Start Logging Setup ##
 
