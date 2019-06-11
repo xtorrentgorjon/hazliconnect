@@ -16,7 +16,7 @@ APP_NAME = "undefined"
 APP_NAME = os.environ["KUBERNETES_APPNAME"]
 POD_NAME = "undefined"
 POD_NAME = os.environ["KUBERNETES_PODNAME"]
-VERSION = "0.2.10"
+VERSION = "0.2.11"
 ENVIRONMENT = "undefined"
 ENVIRONMENT = os.environ["KUBERNETES_NAMESPACE"]
 PARENT_HOST = "undefined"
@@ -73,7 +73,6 @@ def index():
         gelflogger.info('User <{}> visiting main page action.'.format(str(gitlab.get('user').data['public_email'])))
         me = gitlab.get('user')
         PAGE_INFO["rightside_link"] = "logout"
-        gelflogger.info('New client reaching the index page!')
         return render_template('index.html', data=me.data, page_info=PAGE_INFO)
         #return jsonify(me.data)
     PAGE_INFO["rightside_link"] = "index"
