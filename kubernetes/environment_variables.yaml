@@ -1,0 +1,21 @@
+---
+apiVersion: v1
+data:
+  LOG_ENDPOINT_IP: 192.168.1.160
+  LOG_ENDPOINT_PORT: "24223"
+  LOG_MECHANISM: gelf_udp
+  OAUTH_GITLAB_URL: https://gitlab.home.sendotux.net
+kind: ConfigMap
+metadata:
+  name: namespace-config
+  namespace: test
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: namespace-secrets
+type: Opaque
+data:
+  OAUTH_GITLAB_KEY: BASE_64_ENCODED_KEY
+  OAUTH_GITLAB_SECRET: BASE_64_ENCODED_SECRET
