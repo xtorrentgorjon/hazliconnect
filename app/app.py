@@ -12,7 +12,9 @@ app.debug = True
 app.secret_key = 'development'
 oauth = OAuth(app)
 
-VERSION = "0.2.7"
+POD_NAME = "undefined"
+POD_NAME = os.environ["KUBERNETES_PODNAME"]
+VERSION = "0.2.8"
 ENVIRONMENT = "undefined"
 ENVIRONMENT = os.environ["KUBERNETES_NAMESPACE"]
 PARENT_HOST = "undefined"
@@ -31,10 +33,26 @@ OAUTH_PARAM = {"url":os.environ["OAUTH_GITLAB_URL"],
                 "key":os.environ["OAUTH_GITLAB_KEY"],
                 "secret":os.environ["OAUTH_GITLAB_SECRET"]}
 
+## Start Logging Setup ##
+
 logging.basicConfig(level=logging.INFO)
 gelflogger = logging.getLogger()
-gelflogger.addHandler(GelfUdpHandler(host=LOG_PARAM["ip"], port=LOG_PARAM["port"]))
+
+class ContextFilter(logging.Filter):
+    def filter(self, record):
+        record.version = VERSION
+        record.k8s_app = POD_NAME
+        record.k8s_namespace = ENVIRONMENT
+        record.k8s_node = PARENT_HOST
+        record.k8s_pod_name = POD_NAME
+        return True
+
+gelflogger.addFilter(ContextFilter())
+
+gelflogger.addHandler(GelfUdpHandler(host=LOG_PARAM["ip"], port=LOG_PARAM["port"], include_extra_fields=True))
 gelflogger.info('Starting Hazliconnect {}'.format(VERSION))
+
+## End Logging Setup ##
 
 
 gitlab = oauth.remote_app('gitlab',
