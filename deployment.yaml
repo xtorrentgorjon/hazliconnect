@@ -1,29 +1,55 @@
 ---
-apiVersion: apps/v1
+apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: hazliconnect
   labels:
     app: hazliconnect
+    maintainer: xtorrent
     sla: low
-    maintainer: "xtorrent"
     team: SRE
+  name: hazliconnect
+  namespace: test
 spec:
+  replicas: 1
+  revisionHistoryLimit: 10
   selector:
     matchLabels:
       app: hazliconnect
-  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 100%
+      maxUnavailable: 0%
+    type: RollingUpdate
   template:
     metadata:
       labels:
         app: hazliconnect
     spec:
       containers:
-      - name: hazliconnect
+      - env:
+        - name: KUBERNETES_NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: KUBERNETES_NODE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: spec.nodeName
+        envFrom:
+        - configMapRef:
+            name: namespace-config
+        - secretRef:
+            name: namespace-secrets
         image: sendotux/hazliconnect:latest
         imagePullPolicy: Always
+        name: hazliconnect
         ports:
         - containerPort: 5000
+          protocol: TCP
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
 
 ---
 apiVersion: v1
